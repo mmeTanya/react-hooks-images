@@ -46,9 +46,10 @@ function ImageGallery({ query }) {
           return;
         }
         setStatus(Status.REJECTED);
+        setError(`Sorry, we do not find the pictures with a name ${query}`);
       })
       .catch(error => {
-        setError(error);
+        setError(error.message);
         setStatus(Status.REJECTED);
       });
   }, [query]);
@@ -73,7 +74,7 @@ function ImageGallery({ query }) {
         }
       })
       .catch(error => {
-        setError(error);
+        setError(error.message);
         setStatus(Status.REJECTED);
       });
   }, [page]);
@@ -133,7 +134,8 @@ function ImageGallery({ query }) {
   if (status === Status.REJECTED) {
     return (
       <p className="text">
-        Sorry, we do not find the pictures with a name {query}
+        {error}
+       {/*  Sorry, we do not find the pictures with a name {query} */}
       </p>
     );
   }
